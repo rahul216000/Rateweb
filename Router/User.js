@@ -31,12 +31,14 @@ router.post("/signup", async (req, res) => {
 
         res.cookie("UID", UID, {
             secure: process.env.NODE_ENV === "production",
+            maxAge: 200000000 * 60 * 60 * 1000,
             httpOnly: true
         })
 
         const token = jwt.sign({ userId: UID }, SECRET_KEY);
         res.cookie("access_token", token, {
             secure: process.env.NODE_ENV === "production", // Set to true if using HTTPS
+            maxAge: 200000000 * 60 * 60 * 1000,
             httpOnly: true
         }).status(200).json({ message: "SignUp Successfully" });
 
@@ -63,12 +65,14 @@ router.post("/login", async (req, res) => {
 
             res.cookie("UID", user._id, {
                 secure: process.env.NODE_ENV === "production",
+                maxAge: 200000000 * 60 * 60 * 1000,
                 httpOnly: true
             })
 
             const token = jwt.sign({ userId: user._id }, SECRET_KEY);
             res.cookie("access_token", token, {
                 secure: process.env.NODE_ENV === "production", // Set to true if using HTTPS
+                maxAge: 200000000 * 60 * 60 * 1000,
                 httpOnly: true
             }).status(200).json({ message: "Login Successfully" });
 
