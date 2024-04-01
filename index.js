@@ -3,12 +3,14 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const dotenv = require("dotenv");
 const mongoose = require('mongoose');
+const path = require('path');
 const cookieParser = require("cookie-parser");
 
 dotenv.config({ path: './config.env' });
 
 app.use(express.json())
 app.use(cookieParser())
+app.use(express.static(path.join(__dirname, "public")));
 
 const DB = process.env.DATABASE;
 mongoose.set("strictQuery", false);
