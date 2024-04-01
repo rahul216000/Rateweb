@@ -1,0 +1,1088 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RateWork 2.0 Web</title>
+    <style>
+        body {
+            font-size: 17px;
+            max-width: 100%;
+        }
+
+        .wtstyle {
+            margin: 8px 5px 3px 2px;
+            text-align: center;
+            background-color: rgb(239, 243, 239);
+            font-size: 24px;
+            font-weight: bolder;
+            display: inline-block;
+            width: 30%;
+            padding: 4px;
+            border-radius: 12px;
+        }
+
+        .div {
+            margin: 4px 2px 4px;
+            padding: 2px;
+
+        }
+
+        .btn {
+            color: rgb(0, 0, 0);
+            font-weight: bolder;
+            border: 2px solid black;
+            font-size: 20px;
+            text-align: center;
+            border-radius: 4px 2px 4px 2px;
+            padding: 5 5 5 5;
+            background-color: white;
+            padding: 9px;
+            border-radius: 10px;
+        }
+
+        .div button:active {
+            background-color: rgb(178, 199, 199);
+            border: 2px solid green;
+        }
+
+        .inputnumber {
+            border: 2px solid black;
+            border-radius: 18px;
+            margin: 0px 10px;
+            padding: 5px;
+            font-size: 20px;
+            font-weight: 500;
+            width: 50%;
+        }
+
+        #displayfiles,
+        #displayfiledata {
+
+            width: 100%;
+            height: 100%;
+            display: none;
+        }
+
+        table {
+            width: 100%;
+            font-size: 18px;
+        }
+
+        td {
+            width: 65px;
+            padding: 5px;
+            margin: 12px;
+            text-align: center;
+            font-weight: bolder;
+            border: 2px solid green;
+            background-color: rgb(237, 248, 248);
+
+
+
+        }
+
+        .floatbtn {
+            border: 2px solid black;
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 40px;
+            right: 0px;
+            box-shadow: 2px 2px 3px #999;
+            border-radius: 56px;
+            font-size: 2rem;
+            background-color: white;
+
+
+
+        }
+
+
+        #displayfiles input[type="radio"],
+        #displayfiledata input[type="radio"] {
+            display: none;
+
+
+
+        }
+
+        #displayfiles label,
+        #displayfiledata label {
+            color: rgb(0, 0, 0);
+            font-weight: bold;
+            border: 2px solid black;
+            font-size: 18px;
+            text-align: center;
+            border-radius: 2px 2px 2px 2px;
+            display: inline-block;
+            padding: 5px;
+            margin: 5px;
+
+
+        }
+
+        #displayfiles input[type="radio"]:checked+label,
+        #displayfiledata input[type="radio"]:checked+label {
+            background-color: rgb(178, 199, 199);
+            border: 2px solid green;
+        }
+
+        .nam {
+            border: 3px solid #221f1f;
+            margin: 10px auto;
+            text-align: center;
+            font-size: 2rem;
+            font-weight: bold;
+            border-radius: 46px;
+        }
+
+        .btnfordel {
+            border: 3px solid #000000;
+
+            text-align: center;
+            font-size: 2rem;
+            font-weight: bold;
+            border-radius: 46px;
+            background: white;
+            width: 100%;
+            margin-bottom: 14px;
+        }
+
+
+        .inputfile {
+            display: none;
+        }
+
+        .labelfile {
+            color: rgb(0, 0, 0);
+            border: 0px solid rgb(255, 255, 255) !important;
+
+
+        }
+
+        .submit {
+            border: 2px solid black;
+            position: fixed;
+            width: 96px;
+            height: 60px;
+            bottom: 0%;
+            right: 40px;
+            box-shadow: 2px 2px 3px #999;
+            border-radius: 14px;
+            font-size: 19px;
+            display: none;
+        }
+
+
+        #keypadtable {
+            width: 100%;
+            bottom: 0px;
+            position: fixed;
+
+
+        }
+
+        #keypadtable td {
+
+            border: none;
+            background-color: rgb(255, 255, 255);
+
+        }
+
+        body {
+
+
+            position: relative;
+        }
+
+
+
+
+
+
+        #keypad {
+
+
+            position: absolute;
+
+            /* height: 100%;
+    
+    width: 100%; */
+            width: 100%;
+            height: 50%;
+            align-items: center;
+            bottom: 0px;
+
+
+
+
+        }
+
+        #keypadtable button {
+
+
+            color: black;
+            font-size: 22px;
+            background-color: rgb(237, 248, 248);
+            border: 2px solid rgb(0, 0, 0);
+            font-weight: bold;
+            border-radius: 50%;
+            height: 80px;
+            width: 80px;
+
+
+        }
+
+        #keypadtable button:active,
+        td:active {
+            background-color: rgb(178, 199, 199);
+
+        }
+
+
+        .nextfloat {
+            bottom: 76%;
+            right: 78%;
+        }
+
+        .btndiv {
+            padding: 10px;
+            margin-top: 9px;
+        }
+
+        .voicebtn {
+            border: 3px solid #000000;
+            text-align: center;
+            font-size: 2rem;
+            font-weight: bold;
+            border-radius: 46px;
+            background: white;
+            width: 50%;
+            margin-bottom: 14px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="display">
+        <div class="div">
+            <span class="wtstyle">Weight</span>
+            <span> <input type="text" id="weightinput" class="inputnumber" readonly> </span>
+
+        </div>
+        <div class="div">
+            <span class="wtstyle">Tunch</span>
+            <span> <input type="text" id="tunchinput" class="inputnumber" readonly> </span>
+
+        </div>
+
+        <div class="div btndiv">
+            <button class="btn" id="databasebtn" onclick="databaseonclick()">Show Files</button>
+            <button class="btn" id="reset" onclick="reset()">Reset</button>
+            <button class="btn submit" id="submitbtn" onclick="submitonclick()">Submit</button>
+        </div>
+
+        <div id="keypad">
+            <table id="keypadtable">
+
+                <tr>
+                    <td onclick="setnumber('7')"> <button>7</button> </td>
+                    <td onclick="setnumber('8')"> <button>8</button> </td>
+
+                    <td onclick="setnumber('9')"> <button>9</button> </td>
+
+                    <td onclick="delno()"> <button><b>&larr;</b></button> </td>
+
+
+                </tr>
+                <tr>
+                    <td onclick="setnumber('4')"> <button>4</button> </td>
+                    <td onclick="setnumber('5')"> <button>5</button> </td>
+                    <td onclick="setnumber('6')"> <button>6</button> </td>
+                    <td onclick="clr()"> <button>C</button> </td>
+
+                </tr>
+                <tr>
+                    <td onclick="setnumber('1')"> <button>1</button> </td>
+                    <td onclick="setnumber('2')"> <button>2</button> </td>
+                    <td onclick="setnumber('3')"> <button>3</button> </td>
+                    <td onclick="enter()"> <button>&#x23CE;</button> </td>
+
+
+                </tr>
+                <tr>
+                    <td onclick="setnumber('00')"> <button>00</button> </td>
+                    <td onclick="setnumber('0')"> <button>0</button> </td>
+                    <td onclick="setnumber('.')"> <button>.</button> </td>
+                    <td onclick="submitonclick()"> <button>&#x2713;</button> </td>
+
+                </tr>
+
+            </table>
+
+        </div>
+
+    </div>
+
+    <div id="displayfiles">
+    </div>
+
+    <div id="displayfiledata">
+    </div>
+
+
+
+    <script>
+
+        var Today = new Date();
+
+        document.getElementById("weightinput").style.border = "3px solid green"
+        document.getElementById("weightinput").style.backgroundColor = "rgb(237, 248, 248)"
+        var textvoice;
+        boolenter = true;
+
+        function calculatefine(wei, tnch) {
+            let fine = wei * tnch;
+            fine = fine / 100;
+            fine = fine.toFixed(3);
+            return fine;
+        }
+        function reset() {
+            Today = new Date();
+            document.getElementById("weightinput").value = "";
+            document.getElementById("tunchinput").value = "";
+
+
+        }
+        function submitonclick() {
+            let weight = document.getElementById("weightinput").value;
+            let tunch = document.getElementById("tunchinput").value;
+
+            weight = parseFloat(weight).toFixed(3);
+            tunch = parseFloat(tunch).toFixed(2);
+            if (weight == "" || weight == null, tunch == "" || tunch == null) {
+                alert("Weight and tunch can't Empty");
+                weight = 1;
+                tunch = 1;
+
+            }
+
+            var dates = sessionStorage.getItem("addbool");
+            if (dates == null) {
+
+                dates = Today.getDate() + "/" + (Today.getMonth() + 1) + "/" + Today.getFullYear() + " at " + Today.getHours() + ":" + Today.getMinutes() + ":" + Today.getSeconds();
+            } else if (dates) {
+                dates = sessionStorage.getItem("add");
+            }
+            var weightarray = localStorage.getItem(dates + "weight");
+            var tuncharray = localStorage.getItem(dates + "tunch");
+
+            if (weightarray == null && tuncharray == null) {
+                weightarray = [weight];
+                tuncharray = [tunch];
+            } else {
+
+                weightarray = JSON.parse(weightarray);
+                weightarray = Object.values(weightarray);
+                weightarray = weightarray.concat([weight]);
+
+
+                tuncharray = JSON.parse(tuncharray);
+                tuncharray = Object.values(tuncharray);
+                tuncharray = tuncharray.concat([tunch]);
+
+
+            }
+            weightarray = JSON.stringify(weightarray);
+            tuncharray = JSON.stringify(tuncharray);
+
+            localStorage.setItem(dates + "weight", weightarray);
+            localStorage.setItem(dates + "tunch", tuncharray);
+
+
+            var filesarray = localStorage.getItem("files");
+            if (filesarray == null) {
+                filesarray = [dates];
+            } else {
+
+                filesarray = JSON.parse(filesarray);
+                filesarray = Object.values(filesarray);
+                if (filesarray.includes(dates)) {
+
+                } else {
+
+                    filesarray = filesarray.concat([dates]);
+                }
+
+            }
+
+            filesarray = JSON.stringify(filesarray);
+            localStorage.setItem("files", filesarray);
+
+
+            let fine = calculatefine(weight, tunch);
+            console.log(fine);
+            document.getElementById("weightinput").value = "";
+            document.getElementById("tunchinput").value = "";
+            // document.getElementById("weightinput").focus();
+            boolenter = true;
+            document.getElementById("weightinput").style.border = "3px solid green"
+            document.getElementById("tunchinput").style.border = "2px solid black"
+            document.getElementById("tunchinput").style.backgroundColor = "white"
+            document.getElementById("weightinput").style.backgroundColor = "rgb(237, 248, 248)"
+
+
+        }
+
+        function databaseonclick() {
+
+            var files = localStorage.getItem("files");
+            files = JSON.parse(files);
+            files = Object.values(files);
+            files = files.reverse();
+            document.getElementById("display").style.display = "none"
+            var container = document.getElementById("displayfiles");
+            container.style.display = "block";
+
+            let btn = document.createElement("button");
+            btn.setAttribute("onclick", "closedisplayfiles()");
+            btn.innerText = "X";
+            btn.className = "btnc floatbtn"
+            container.appendChild(btn);
+
+            var table = document.createElement("table");
+            for (var i = 0; i < files.length; i++) {
+                let row = document.createElement("tr");
+
+                var inputfile = document.createElement("input");
+                var label = document.createElement("label");
+
+                inputfile.type = "radio";
+                inputfile.name = "fileselected";
+                inputfile.innerText = files[i];
+                label.innerText = files[i];
+                inputfile.value = files[i];
+                inputfile.setAttribute("onclick", "displayfiledata()");
+
+                inputfile.id = files[i];
+                label.htmlFor = files[i];
+
+                row.appendChild(inputfile);
+                row.appendChild(label);
+                table.appendChild(row);
+
+
+            }
+
+            container.appendChild(table);
+        }
+
+        function voice() {
+            var fileselected = document.getElementsByName("fileselected");
+            for (var i = 0; i < fileselected.length; i++) {
+                if (fileselected[i].checked) {
+
+                    fileselected = fileselected[i].value;
+                }
+            }
+            console.log(fileselected);
+
+            var weightarray = localStorage.getItem(fileselected + "weight");
+            var tuncharray = localStorage.getItem(fileselected + "tunch");
+
+            weightarray = JSON.parse(weightarray);
+            weightarray = Object.values(weightarray);
+
+            tuncharray = JSON.parse(tuncharray);
+            tuncharray = Object.values(tuncharray);
+
+
+
+
+            for (var i = 0; i < weightarray.length; i++) {
+                textvoice = sessionStorage.getItem("textvoice");
+                if (textvoice == null) {
+                    textvoice = (i + 1) + " is id. " + weightarray[i] + " is weight. ";
+                } else {
+
+                    textvoice = textvoice + (i + 1) + " is id. " + weightarray[i] + " is weight. ";
+                }
+                textvoice = textvoice.concat(tuncharray[i] + " is tunch. ");
+                textvoice = textvoice.concat(calculatefine(weightarray[i], tuncharray[i]) + " is fine. ");
+                console.log(textvoice)
+                sessionStorage.setItem("textvoice", textvoice);
+
+
+            }
+
+            var msg = new SpeechSynthesisUtterance();
+            var voices = window.speechSynthesis.getVoices();
+            msg.voice = voices[10];
+            msg.voiceURI = "native";
+            msg.volume = 1;
+            if (localStorage.getItem("speedofvoice") == null) {
+
+                msg.rate = 1;
+            } else {
+                let spe = localStorage.getItem("speedofvoice");
+                msg.rate = parseInt(spe);
+            }
+            msg.pitch = 0.8;
+
+            msg.lang = 'en-US';
+            msg.text = textvoice;
+            speechSynthesis.speak(msg);
+
+
+
+
+        }
+
+        function voicespeed() {
+            let speed = prompt("Enter your voice rate:", "1");
+            sessionStorage.removeItem("textvoice");
+            speechSynthesis.cancel();
+            localStorage.setItem("speedofvoice", speed);
+
+        }
+
+        async function displayfiledata() {
+            var fileselected = document.getElementsByName("fileselected");
+            for (var i = 0; i < fileselected.length; i++) {
+                if (fileselected[i].checked) {
+
+                    fileselected = fileselected[i].value;
+                }
+            }
+
+
+
+            var weightarray = localStorage.getItem(fileselected + "weight");
+            var tuncharray = localStorage.getItem(fileselected + "tunch");
+
+            // Send to backend
+
+            let requested = await fetch(`/send-data`, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    weightarray, tuncharray, fileselected
+
+                })
+            })
+            let data = await requested.text();
+
+            // Data sent
+            
+
+            weightarray = JSON.parse(weightarray);
+            weightarray = Object.values(weightarray);
+
+            tuncharray = JSON.parse(tuncharray);
+            tuncharray = Object.values(tuncharray);
+
+            
+            
+            document.getElementById("displayfiles").style.display = "none"
+            var container = document.getElementById("displayfiledata");
+            container.style.display = "block";
+            let nam = document.createElement("div");
+            nam.innerHTML = fileselected;
+            nam.className = "nam";
+            nam.setAttribute("onclick", "adddata()");
+
+            container.appendChild(nam);
+
+            let voice = document.createElement("button");
+            voice.innerHTML = "Voice";
+            voice.className = "voicebtn";
+            voice.setAttribute("onclick", "voice()");
+
+            container.appendChild(voice);
+
+            let voicespeed = document.createElement("button");
+            voicespeed.innerHTML = "Speed";
+            voicespeed.className = "voicebtn";
+            voicespeed.setAttribute("onclick", "voicespeed()");
+
+            container.appendChild(voicespeed);
+
+            let btn = document.createElement("button");
+            btn.setAttribute("onclick", "closedisplayfiledata()");
+            btn.innerText = "X";
+            btn.className = "btnc floatbtn"
+            container.appendChild(btn);
+
+            let btndel = document.createElement("button");
+            btndel.innerHTML = "Delete";
+            btndel.className = "btnfordel";
+            btndel.setAttribute("onclick", "btndel()");
+            container.appendChild(btndel);
+            var table = document.createElement("table");
+
+            for (var p = 0; p < weightarray.length; p++) {
+                let row = document.createElement("tr");
+
+                let col = document.createElement("td");
+                let col0 = document.createElement("td");
+                let col2 = document.createElement("td");
+                let col3 = document.createElement("td");
+
+                col0.innerHTML = p + 1;
+
+                col3.innerHTML = calculatefine(weightarray[p], tuncharray[p]);
+
+                col0.style.width = "35px";
+
+
+
+
+                let row1 = document.createElement("tr");
+
+
+
+                var inputfile1 = document.createElement("input");
+                var label1 = document.createElement("label");
+
+                var inputfile2 = document.createElement("input");
+                var label2 = document.createElement("label");
+
+
+                inputfile1.type = "radio";
+                inputfile2.type = "radio";
+
+                inputfile1.name = "inputselectedweight";
+                inputfile2.name = "inputselectedtunch";
+
+
+                inputfile1.innerText = weightarray[p];
+                inputfile1.value = weightarray[p];
+                inputfile1.id = weightarray[p];
+                inputfile1.className = "inputfile";
+                label1.innerText = weightarray[p];
+                label1.htmlFor = weightarray[p];
+                label1.className = "labelfile";
+
+                inputfile2.innerText = tuncharray[p];
+                inputfile2.value = tuncharray[p];
+
+                inputfile2.id = tuncharray[p];
+                inputfile2.className = "inputfile";
+                label2.innerText = tuncharray[p];
+                label2.htmlFor = tuncharray[p];
+                label2.className = "labelfile";
+
+
+                inputfile1.setAttribute("onclick", "updateweight()");
+                inputfile2.setAttribute("onclick", "updatetunch()");
+
+                col.appendChild(inputfile1);
+                col2.appendChild(inputfile2);
+
+                col.appendChild(label1);
+                col2.appendChild(label2);
+
+
+
+                row1.appendChild(col0);
+                row1.appendChild(col);
+                row1.appendChild(col2);
+                row1.appendChild(col3);
+                table.appendChild(row1);
+
+
+            }
+            container.appendChild(table);
+            let hr = document.createElement("hr");
+            container.appendChild(hr);
+            var totalweight = 0;
+            var totalfine = 0;
+            for (var l = 0; l < weightarray.length; l++) {
+                totalweight = totalweight + parseFloat(weightarray[l]);
+                totalfine = totalfine + parseFloat(calculatefine(weightarray[l], tuncharray[l]));
+
+            }
+            totalfine = totalfine.toFixed(3);
+            let allfine = alltotalfine(totalweight, totalfine);;
+            let tukdefine = tukdefinefn(totalweight, totalfine);
+            console.log(totalweight)
+            console.log(totalfine)
+            console.log(allfine)
+
+            let table2 = document.createElement("table");
+            let row = document.createElement("tr");
+            let row1 = document.createElement("tr");
+            let row2 = document.createElement("tr");
+
+            let col = document.createElement("td");
+            let col0 = document.createElement("td");
+            let col1 = document.createElement("td");
+            let col2 = document.createElement("td");
+
+
+            let col3 = document.createElement("td");
+            let col4 = document.createElement("td");
+
+            col3.innerHTML = "Tukde Fine";
+            col4.innerHTML = "Total Fine";
+
+
+
+            col0.innerHTML = tukdefine;
+            col.innerHTML = totalweight.toFixed(3);
+            col1.innerHTML = totalfine;
+            col2.innerHTML = allfine;
+            col.style.width = "80px";
+
+            row.appendChild(col);
+            row.appendChild(col1);
+
+            row1.appendChild(col3);
+            row1.appendChild(col0);
+
+            row2.appendChild(col4);
+            row2.appendChild(col2);
+
+            table2.appendChild(row);
+            // table2.appendChild(row1);
+            // table2.appendChild(row2);
+
+            container.appendChild(table2);
+
+
+
+        }
+
+        function closedisplayfiledata() {
+            var displayfiledata = document.getElementById("displayfiledata");
+            var displayfiles = document.getElementById("displayfiles");
+
+            displayfiles.style.display = "block";
+            displayfiledata.style.display = "none";
+
+            displayfiledata.innerText = "";
+            sessionStorage.removeItem("textvoice");
+            speechSynthesis.cancel();
+        }
+
+        function closedisplayfiles() {
+            var display = document.getElementById("display");
+            var displayfiles = document.getElementById("displayfiles");
+
+            display.style.display = "block";
+            displayfiles.style.display = "none";
+
+            displayfiles.innerText = "";
+        }
+
+        function updateweight() {
+
+            var fileselected = document.getElementsByName("fileselected");
+            for (var i = 0; i < fileselected.length; i++) {
+                if (fileselected[i].checked) {
+
+                    fileselected = fileselected[i].value;
+
+                }
+            }
+
+            var inputselectedweight = document.getElementsByName("inputselectedweight");
+            var index;
+            for (var i = 0; i < inputselectedweight.length; i++) {
+                if (inputselectedweight[i].checked) {
+                    index = i;
+                    inputselectedweight = inputselectedweight[i].value;
+
+                }
+            }
+
+            console.log(inputselectedweight);
+            let updatetext = prompt("Enter value to be Update in Weight", inputselectedweight);
+            let weiarray = localStorage.getItem(fileselected + "weight");
+            weiarray = JSON.parse(weiarray);
+            weiarray = Object.values(weiarray);
+            weiarray[index] = updatetext;
+            weiarray = JSON.stringify(weiarray);
+            localStorage.setItem(fileselected + "weight", weiarray);
+            document.getElementById("displayfiledata").innerHTML = "";
+
+            displayfiledata();
+
+
+
+
+
+        }
+
+        function updatetunch() {
+
+            var fileselected = document.getElementsByName("fileselected");
+            for (var i = 0; i < fileselected.length; i++) {
+                if (fileselected[i].checked) {
+
+                    fileselected = fileselected[i].value;
+
+                }
+            }
+
+            var inputselectedtunch = document.getElementsByName("inputselectedtunch");
+            var index;
+            for (var i = 0; i < inputselectedtunch.length; i++) {
+                if (inputselectedtunch[i].checked) {
+                    index = i;
+                    inputselectedtunch = inputselectedtunch[i].value;
+
+                }
+            }
+
+            console.log(inputselectedtunch);
+            let updatetext = prompt("Enter value to be Update in Tunch", inputselectedtunch);
+            let tncharray = localStorage.getItem(fileselected + "tunch");
+            tncharray = JSON.parse(tncharray);
+            tncharray = Object.values(tncharray);
+            tncharray[index] = updatetext;
+            tncharray = JSON.stringify(tncharray);
+            localStorage.setItem(fileselected + "tunch", tncharray);
+            document.getElementById("displayfiledata").innerHTML = "";
+
+            displayfiledata();
+
+
+
+
+
+        }
+
+
+        function adddata() {
+            var fileselected = document.getElementsByName("fileselected");
+            for (var i = 0; i < fileselected.length; i++) {
+                if (fileselected[i].checked) {
+
+                    fileselected = fileselected[i].value;
+                    sessionStorage.setItem("add", fileselected);
+                    sessionStorage.setItem("addbool", true);
+                }
+            }
+            var display = document.getElementById("display");
+            var displayfiledata = document.getElementById("displayfiledata");
+
+            display.style.display = "block";
+            displayfiledata.style.display = "none";
+
+
+
+            let btn = document.createElement("button");
+            btn.setAttribute("onclick", "closeadddiv()");
+            btn.innerText = "X";
+            btn.className = "btnc floatbtn nextfloat"
+            btn.id = "btnid";
+            display.appendChild(btn);
+            document.getElementById("databasebtn").style.display = "none";
+            document.getElementById("reset").style.display = "none";
+
+            document.getElementById("weightinput").focus();
+
+
+        }
+
+        function btndel() {
+
+            if (confirm("Delete Permanently?")) {
+
+                var fileselected = document.getElementsByName("fileselected");
+                for (var i = 0; i < fileselected.length; i++) {
+                    if (fileselected[i].checked) {
+
+                        fileselected = fileselected[i].value;
+
+                    }
+                }
+
+
+                var file = localStorage.getItem("files");
+                file = JSON.parse(file);
+                file = Object.values(file);
+                let check = file.includes(fileselected);
+                var bool;
+
+                if (check) {
+                    if (file.length == 1) {
+                        bool = true;
+                        localStorage.removeItem("files");
+                    } else {
+                        let i = file.indexOf(fileselected);
+
+                        file.splice(i, 1);
+                        file = JSON.stringify(file);
+                        localStorage.setItem("files", file);
+                    }
+                } else {
+
+                }
+
+                localStorage.removeItem(fileselected + "weight");
+                localStorage.removeItem(fileselected + "tunch");
+
+                var displayfiledata = document.getElementById("displayfiledata");
+                var displayfiles = document.getElementById("displayfiles");
+                displayfiledata.innerHTML = "";
+                displayfiles.innerHTML = "";
+
+                if (bool) {
+                    var display = document.getElementById("display");
+                    display.style.display = "block";
+
+                } else {
+
+                    databaseonclick();
+                }
+
+
+
+            } else {
+                console.log("not delted")
+            }
+
+
+
+
+        }
+
+        function closeadddiv() {
+            let display = document.getElementById("display");
+            let displayfiledataid = document.getElementById("displayfiledata");
+
+            displayfiledataid.style.display = "block";
+            display.style.display = "none";
+
+            display.removeChild(document.getElementById("btnid"));
+
+
+            sessionStorage.removeItem("add");
+            sessionStorage.removeItem("addbool");
+
+            displayfiledataid.innerHTML = "";
+            displayfiledata();
+            document.getElementById("databasebtn").style.display = "inline-block";
+            document.getElementById("reset").style.display = "inline-block";
+
+        }
+
+        function alltotalfine(wei, fine) {
+
+            var value = localStorage.getItem("tukde");
+
+            if (value == null) {
+                value = 25 / 10000;
+            } else {
+                value = parseInt(value);
+                value = value / 10000;
+            }
+
+            let fin = parseFloat(wei) * value;
+            fin = fin + parseFloat(fine);
+            fin = fin.toFixed(3);
+
+            return fin;
+
+
+        }
+
+        function tukdefinefn(weight, fine) {
+
+            let totalfine = alltotalfine(weight, fine);
+            let tfine = totalfine - parseFloat(fine);
+            tfine = tfine.toFixed(3);
+            return tfine;
+
+        }
+
+        function alertrate() {
+            let value = prompt("Enter your Rate:", "25");
+            localStorage.setItem("tukde", value);
+
+        }
+        function enter() {
+            if (boolenter) {
+                document.getElementById("weightinput").style.border = "2px solid black"
+                document.getElementById("tunchinput").style.border = "3px solid green"
+                document.getElementById("tunchinput").style.backgroundColor = "rgb(237, 248, 248)"
+                document.getElementById("weightinput").style.backgroundColor = "white"
+
+
+
+
+                boolenter = false;
+            } else {
+                document.getElementById("weightinput").style.border = "3px solid green"
+                document.getElementById("tunchinput").style.border = "2px solid black"
+                document.getElementById("weightinput").style.backgroundColor = "rgb(237, 248, 248)"
+                document.getElementById("tunchinput").style.backgroundColor = "white"
+
+
+
+                boolenter = true;
+            }
+
+        }
+        function setnumber(n) {
+            if (boolenter) {
+
+                let weight = document.getElementById("weightinput");
+
+                weight.value = weight.value.concat(n);
+
+
+            } else {
+                let tunch = document.getElementById("tunchinput");
+                tunch.value = tunch.value.concat(n);
+
+            }
+
+
+
+
+        }
+
+        function delno() {
+
+            if (boolenter) {
+
+                let weight = document.getElementById("weightinput");
+
+                weight.value = weight.value.slice(0, -1);
+
+
+            } else {
+                let tunch = document.getElementById("tunchinput");
+                tunch.value = tunch.value.slice(0, -1);
+            }
+
+        }
+
+        function clr() {
+
+            if (boolenter) {
+
+                document.getElementById("weightinput").value = "";
+
+
+
+
+            } else {
+                let tunch = document.getElementById("tunchinput");
+                tunch.value = "";
+            }
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,29 @@
+const Sib = require('sib-api-v3-sdk')
+console.log('Send mail');
+const client = Sib.ApiClient.instance
+const MyapiKey = client.authentications['api-key']
+MyapiKey.apiKey = process.env.EMAIL_API_KEY;
+
+
+function SendMail(sender, email, subject, content) {
+    const tranEmailApi = new Sib.TransactionalEmailsApi()
+
+    const receivers = [
+        {
+            email: email
+        }
+    ]
+
+    tranEmailApi
+        .sendTransacEmail({
+            sender,
+            to: receivers,
+            subject: subject,
+            htmlContent: `${content}
+        `
+        })
+        .then(console.log)
+        .catch(console.log)
+}
+
+module.exports = SendMail;
