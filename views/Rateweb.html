@@ -8,11 +8,36 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/three-dots/0.3.2/three-dots.min.css"
+        integrity="sha512-+eTSgc6ThafkxKlVr4a/XE1HdNz3zNWLdq5vP8H7ac9MuW/LMQBXI3O3ueyyf33yeCn+KhkVP1wBYYIb0OZh3g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <title>RateWeb</title>
     <style>
         body {
             font-size: 17px;
             max-width: 100%;
+        }
+
+        #loading {
+            position: fixed;
+            display: block;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            text-align: center;
+            opacity: 0.8;
+            background-color: #fff;
+            z-index: 1;
+        }
+
+        #loading-image {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            position: relative;
+            z-index: 100;
         }
 
         .wtstyle {
@@ -270,6 +295,11 @@
 </head>
 
 <body>
+
+    <div id="loading" style="display: none;">
+
+        <div class="dot-windmill" id="loading-image"></div>
+    </div>
 
     <div id="display">
         <div class="div">
@@ -569,20 +599,29 @@
 
             // Send to backend
 
-            let requested = await fetch(`/send-data`, {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    weightarray, tuncharray, fileselected
+            document.getElementById("loading").style.display = "block"
 
+            try {
+                let requested = await fetch(`/send-data`, {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        weightarray, tuncharray, fileselected
+    
+                    })
                 })
-            })
-            let data = await requested.text();
+                let data = await requested.text();
+            } catch (error) {
+                
+                document.getElementById("loading").style.display = "none"
+            }
 
             // Data sent
+            document.getElementById("loading").style.display = "none"
+
 
 
             weightarray = JSON.parse(weightarray);

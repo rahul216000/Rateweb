@@ -7,7 +7,7 @@ const UserAccount = require('../Model/UserAccount');
 
 let SECRET_KEY = process.env.SECRET_KEY
 
-const {verifyToken, verifiedUser} = require("../Authentication/verification")
+const { verifyToken, verifiedUser } = require("../Authentication/verification")
 
 // Featured APIs
 
